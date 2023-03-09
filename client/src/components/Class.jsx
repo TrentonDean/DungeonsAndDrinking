@@ -7,9 +7,13 @@ const Class = (props) => {
     const [playerClass, setPlayerClass] = useState('default')
     const [classBio, setClassBio] = useState("Pick your class, Adventurer")
 
+    const buttonId = "button" + id                                          // I used these as element id's so I can disable that specific players choices when they're ready                   
+    const playerNId = "playerName" + id
+    const playerCId = "playerClass" + id
+
     const [error, setError] = useState([])
 
-    const bioFunction = (e) => {                                             // brings up bio based on class
+    const bioFunction = (e) => {                                            // brings up bio based on class
         e.preventDefault()
         setPlayerClass(e.target.value)
 
@@ -46,9 +50,9 @@ const Class = (props) => {
         if(isNaN(playerClass)){
             setError('Pick a class!!!')
         }else{
-            document.getElementById('button').disabled = true               // lock in the player info 
-            document.getElementById('playerName').disabled = true
-            document.getElementById('playerClass').disabled = true
+            document.getElementById('button'+id).disabled = true               // lock in the player info 
+            document.getElementById('playerName'+id).disabled = true
+            document.getElementById('playerClass'+id).disabled = true
 
             switch (id){                                                    // adds player info to session storage
                 case 1: 
@@ -103,8 +107,8 @@ const Class = (props) => {
         <div className="class mt-3">
             <h1>Player {id} </h1>
             <form onSubmit={classSelect}>
-                <input className="form-control text-center" type="text" placeholder="Player Name" id="playerName" onChange={(e) => {setPlayerName(e.target.value)}}/>
-                <select className="form-select text-center" aria-label="Default select example" id="playerClass" onChange={bioFunction}>
+                <input className="form-control text-center" type="text" placeholder="Player Name" id={playerNId} onChange={(e) => {setPlayerName(e.target.value)}}/>
+                <select className="form-select text-center" aria-label="Default select example" id={playerCId} onChange={bioFunction}>
                     <option value={'default'}>Pick Your Class</option>
                     <option value={1}>Wizard</option>
                     <option value={2}>Rogue</option>
@@ -114,7 +118,7 @@ const Class = (props) => {
                 </select>
                 { classBio ? <p className="classBio">{classBio}</p> : null }
                 { error ? <p className="red-text">{error}</p> : null }
-                <button type="submit" className="btn btn-success" id='button'>Ready!</button>
+                <button type="submit" className="btn btn-success" id={buttonId}>Ready!</button>
             </form>
         </div>
     )
