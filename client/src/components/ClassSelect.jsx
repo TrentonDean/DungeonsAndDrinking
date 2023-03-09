@@ -17,7 +17,7 @@ const ClassSelect = () => {
     }
 
     return(
-        <div>
+        <div className="class-select">
             <h1>num of players is {sessionStorage.getItem('num')}</h1>
             <button className="btn btn-danger" onClick={home}>Return home</button>
             <div className="class-container">

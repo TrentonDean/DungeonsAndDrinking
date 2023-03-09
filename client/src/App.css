@@ -1,5 +1,8 @@
 .App {
+  display: flex;
+  flex-direction: column;
   text-align: center;
+  align-items: center;
 }
 
 .player-num {
@@ -16,13 +19,22 @@
   color: red;
 }
 
+.welcome {
+  width: 80%;
+}
+
+.class-select {
+  width: 90%;
+}
+
 .class-container {
   display: flex;
-
 }
 
 .class {
   border: 1px solid black;
+  border-radius: 25px;
   flex: 1;
   height: 500px;
+  margin: 0 10px 0 10px;
 }

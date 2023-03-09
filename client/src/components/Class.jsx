@@ -4,7 +4,7 @@ const Class = () => {
 
 
     return(
-        <div className="class">
+        <div className="class mt-3">
             <h1>class comp</h1>
         </div>
     )
