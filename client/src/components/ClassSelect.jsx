@@ -13,16 +13,16 @@ const ClassSelect = () => {
     }
 
     for(let i=1; i<=sessionStorage.getItem('num'); i++){
-        classes.push(<Class key={i} />)
+        classes.push(<Class id={i} key={i}/>)
     }
 
     return(
         <div className="class-select">
-            <h1>num of players is {sessionStorage.getItem('num')}</h1>
-            <button className="btn btn-danger" onClick={home}>Return home</button>
+            <h1>Time to Pick Your Class!</h1>
             <div className="class-container">
                 {classes}
             </div>
+            <button className="btn btn-danger" onClick={home}>Return home</button>
         </div>
     )
 }
