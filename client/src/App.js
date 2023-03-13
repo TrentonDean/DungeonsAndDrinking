@@ -3,6 +3,7 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import Welcome from './components/Welcome';
 import { useState } from 'react';
 import ClassSelect from './components/ClassSelect';
+import Intro from './components/Intro';
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route exact path='/' element={<Welcome onPlayers={players}/>} />
           <Route path='/class-select' element={<ClassSelect/>} />
+          <Route path='/intro' element={<Intro/>} />
         </Routes>
       </BrowserRouter>
     </div>

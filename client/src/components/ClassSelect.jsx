@@ -1,5 +1,5 @@
-import {React, useEffect, useState} from "react";
-import { Link, useNavigate } from "react-router-dom";
+import {React, useState} from "react";
+import { useNavigate } from "react-router-dom";
 import Class from "./Class";
 
 const ClassSelect = () => {
@@ -8,12 +8,21 @@ const ClassSelect = () => {
 
     const classes = []
 
+    const [ready, setReady] = useState('')
+
     const home = () => {
+        sessionStorage.clear()
         navigate('/')
     }
 
-    for(let i=1; i<=sessionStorage.getItem('num'); i++){
-        classes.push(<Class id={i} key={i}/>)
+    const isReady = (ready) => {
+        if(ready===true){
+            setReady(true)
+        }
+    }
+
+    for(let i=1; i<=sessionStorage.getItem('num'); i++){        // puts the correct number of player select screens up
+        classes.push(<Class id={i} key={i} isReady={isReady}/>)
     }
 
     return(
@@ -22,6 +31,12 @@ const ClassSelect = () => {
             <div className="class-container">
                 {classes}
             </div>
+            { ready ? 
+                <div>
+                    <p>All players ready?</p> 
+                    <p><button className="btn btn-success" onClick={(e)=>{navigate('/intro')}}>Ready</button> | <button className="btn btn-danger" onClick={(e)=>{window.location.reload(false);}}>Not Ready</button></p>
+                </div>
+            : null }
             <button className="btn btn-danger" onClick={home}>Return home</button>
         </div>
     )

@@ -13,6 +13,15 @@ const Class = (props) => {
 
     const [error, setError] = useState([])
 
+    const readyFunction = () => {                                           // checks to see if all players are ready
+        const ready = sessionStorage.getItem('readyNum')
+        const numToBe = sessionStorage.getItem('num')
+
+        if(ready === numToBe){
+            props.isReady(true)
+        }
+    }
+
     const bioFunction = (e) => {                                            // brings up bio based on class
         e.preventDefault()
         setPlayerClass(e.target.value)
@@ -50,10 +59,6 @@ const Class = (props) => {
         if(isNaN(playerClass)){
             setError('Pick a class!!!')
         }else{
-            document.getElementById('button'+id).disabled = true               // lock in the player info 
-            document.getElementById('playerName'+id).disabled = true
-            document.getElementById('playerClass'+id).disabled = true
-
             switch (id){                                                    // adds player info to session storage
                 case 1: 
                     const player1 = {
@@ -61,44 +66,116 @@ const Class = (props) => {
                         'name': playerName,
                         'class': playerClass
                     }
+
+                    document.getElementById('button'+id).disabled = true               // lock in the player info 
+                    document.getElementById('playerName'+id).disabled = true
+                    document.getElementById('playerClass'+id).disabled = true
+
                     sessionStorage.setItem('player1',JSON.stringify(player1))
+                    sessionStorage.setItem('readyNum',1)
                     break
 
                 case 2:
-                    const player2 = {
-                        'id': id,
-                        'name': playerName,
-                        'class': playerClass
+                    if(sessionStorage.getItem('player1')){
+                        const player2 = {
+                            'id': id,
+                            'name': playerName,
+                            'class': playerClass
+                        }
+
+                        document.getElementById('button'+id).disabled = true
+                        document.getElementById('playerName'+id).disabled = true
+                        document.getElementById('playerClass'+id).disabled = true
+
+                        sessionStorage.setItem('player2',JSON.stringify(player2))
+                        sessionStorage.setItem('readyNum',2)
+
+                        readyFunction()
+
+                        setError('')
+
+                        break
+                    }else{
+                        setError("One at a time please")
+                        break
                     }
-                    sessionStorage.setItem('player2',JSON.stringify(player2))
-                    break
 
                 case 3:
-                    const player3 = {
-                        'id': id,
-                        'name': playerName,
-                        'class': playerClass
+                    if(sessionStorage.getItem('player2')){
+                        const player3 = {
+                            'id': id,
+                            'name': playerName,
+                            'class': playerClass
+                        }
+
+                        document.getElementById('button'+id).disabled = true
+                        document.getElementById('playerName'+id).disabled = true
+                        document.getElementById('playerClass'+id).disabled = true
+
+                        sessionStorage.setItem('player3',JSON.stringify(player3))
+                        sessionStorage.setItem('readyNum',3)
+
+                        readyFunction()
+
+                        setError('')
+
+                        break
+                    }else{
+                        setError("One at a time please")
+                        break
                     }
-                    sessionStorage.setItem('player3',JSON.stringify(player3))
-                    break
 
                 case 4:
-                    const player4 = {
-                        'id': id,
-                        'name': playerName,
-                        'class': playerClass
+                    if(sessionStorage.getItem('player3')){
+                        const player4 = {
+                            'id': id,
+                            'name': playerName,
+                            'class': playerClass
+                        }
+
+                        document.getElementById('button'+id).disabled = true
+                        document.getElementById('playerName'+id).disabled = true
+                        document.getElementById('playerClass'+id).disabled = true
+
+                        sessionStorage.setItem('player4',JSON.stringify(player4))
+                        sessionStorage.setItem('readyNum',4)
+
+                        readyFunction()
+                        setError('')
+
+                        break
+                    }else{
+                        setError("One at a time please")
+                        break
                     }
-                    sessionStorage.setItem('player4',JSON.stringify(player4))
-                    break
 
                 case 5:
-                    const player5 = {
-                        'id': id,
-                        'name': playerName,
-                        'class': playerClass
+                    if(sessionStorage.getItem('player4')){
+                        const player5 = {
+                            'id': id,
+                            'name': playerName,
+                            'class': playerClass
+                        }
+
+                        document.getElementById('button'+id).disabled = true
+                        document.getElementById('playerName'+id).disabled = true
+                        document.getElementById('playerClass'+id).disabled = true
+
+                        sessionStorage.setItem('player5',JSON.stringify(player5))
+                        sessionStorage.setItem('readyNum',5)
+
+                        readyFunction()
+                        setError('')
+
+                        break
+                    }else{
+                        setError("One at a time please")
+                        break
                     }
-                    sessionStorage.setItem('player5',JSON.stringify(player5))
-                    break
+
+                    default:
+                        console.log('something went wrong')
+                        break
             }
         }
     }
